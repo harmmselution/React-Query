@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import PostDetails from './PostDetails';
 function Posts() {
-  const fetcher = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10');
+  async function getPosts(currentPage) {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${currentPage}`);
     return res.json();
-  };
-  const { data, isSuccess } = useQuery('key', fetcher);
+  }
   const [currentPost, setCurrentPost] = useState(null);
-
-  console.log(data);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, isSuccess } = useQuery(['key', currentPage], () => getPosts(currentPage));
   return (
     <>
       <div className="asd">
@@ -22,6 +21,15 @@ function Posts() {
           : 'Loading...'}
       </div>
       {currentPost && <PostDetails post={currentPost} />}
+      <div className="buttons">
+        <button disabled={currentPage <= 1} onClick={() => setCurrentPage((prev) => prev - 1)}>
+          Previous
+        </button>
+        {currentPage}
+        <button disabled={currentPage >= 10} onClick={() => setCurrentPage((prev) => prev + 1)}>
+          Next
+        </button>
+      </div>
     </>
   );
 }

@@ -4,6 +4,7 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: tomato;
 }
 
 code {
@@ -12,12 +13,16 @@ code {
 .App {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   gap: 50px;
 }
 .asd {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 20px;
+  gap: 30px;
+}
+.buttons {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
 }
